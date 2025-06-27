@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net9.0-windows7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <UseWPF>True</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Smithbox\src\Andre\Andre.Formats\Andre.Formats.csproj" />
+    <ProjectReference Include="..\smithbox\src\Andre\Andre.IO\Andre.IO.csproj" />
+  </ItemGroup>
+
+</Project>
