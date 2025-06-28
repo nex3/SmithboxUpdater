@@ -137,6 +137,18 @@ IEnumerable<(RowNameEntry, PARAM.Row)> alignRows(string name)
         }
 
         var entry = paramNames[i];
+        while (row.ID > entry.ID)
+        {
+            paramJson.Entries.RemoveAt(i);
+            for (var j = i; j < paramJson.Entries.Count; j++)
+            {
+                paramJson.Entries[j].Index = j;
+                paramNames[j] = paramNames[j + 1];
+            }
+            paramNames.Remove(paramJson.Entries.Count);
+            entry = paramNames[i];
+        }
+
         if (row.ID < entry.ID)
         {
             // Not efficient but it'll only happen once per each batch of new IDs
@@ -204,6 +216,11 @@ foreach (var name in paramsWeCareAbout)
         var prefix = new Regex("^(<[^>]+>)( |$)").Match(entry.Name).Groups[1]?.Value ?? "";
         entry.Name = $"{prefix} (0% weight)".Trim();
     }
+}
+
+foreach (var param in paramsWeCareAbout)
+{
+    alignRows(param).ToList();
 }
 
 var options = new JsonSerializerOptions();
